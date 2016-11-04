@@ -34,12 +34,12 @@
 
 - (BOOL)checkMedicalRecord:(Patient*)patient
                           :(Rx*)rx {
-    if (![medicalRecord.allKeys containsObject:patient]) {
-        if (![medicalRecord[patient] containsObject:rx.medName]) {
-            return FALSE;
+    for (Rx *i in medicalRecord[patient.name]) {
+        if ([rx.medName isEqualTo:i.medName]) {
+            return TRUE;
         }
     }
-    return TRUE;
+    return FALSE;
 }
 
 - (void)addMedicalRecord:(Patient*)patient

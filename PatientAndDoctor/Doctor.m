@@ -50,11 +50,13 @@
         for (NSString *i in self.knowledge.allKeys) {
             if ([patient.symptoms containsObject:i]) {
                 Rx *rx = [[Rx alloc] initWithPatient:patient.name doctor:self.name medName:self.knowledge[i]];
-                [[MedicalRecord sharedMedicalRecord] addMedicalRecord:patient :rx];
-                
+      //          BOOL x = [[MedicalRecord sharedMedicalRecord] checkMedicalRecord:patient :rx];
+                if (![[MedicalRecord sharedMedicalRecord] checkMedicalRecord:patient :rx]) {
+                    NSLog(@"\n%@ is writing a prescription for %@ to treat %@", self.name, rx.medName, i);
+                    [[MedicalRecord sharedMedicalRecord] addMedicalRecord:patient :rx];
+                }
             }
         }
-        
     }
     [[MedicalRecord sharedMedicalRecord] printMedicalRecord:patient];
 }

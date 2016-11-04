@@ -15,6 +15,8 @@ int main(int argc, const char * argv[]) {
         Patient *p = [[Patient alloc] initWithAge:31 name:@"Bob Dole" hasMedCard:TRUE symptoms:[NSMutableSet setWithArray:@[@"jaundice", @"rickets", @"headache"]]];
         Doctor *d = [[Doctor alloc] initWithName:@"Dr. Dolan" spec:@"Phlebotomist" patients:[NSMutableSet new]];
         [p visitDoctor:d];
+        [p.symptoms addObject:@"hiccups"];
+        [p visitDoctor:d];
     }
     return 0;
 }
